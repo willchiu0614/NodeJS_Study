@@ -1,0 +1,135 @@
+<%- include('header') %>
+<body>
+    
+    <div class="container">
+        <div class="card-wrap">
+    
+            <div class="card border-0 shadow card--login is-show" id="login">
+                <div class="card-body">
+                    <h2 class="card-title">登入</h2>
+                    <div id="fblogin"  class="fb-login-button" data-width="" data-size="small" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();" ></div>
+                    	
+                    
+                    <p>第三方登入</p>
+                    <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button> -->
+                    <p class="badge-wrap">
+                        <a class="badge"><i class="fab fa-facebook-f"></i></a>
+                        <a class="badge"><i class="fab fa-google"></i></a>
+                        <a class="badge"><i class="fab fa-twitter"></i></a>
+                        <a class="badge"><i class="fab fa-github"></i></a>
+                    </p>
+                    <div type="hidden"  name="alertStatus" id="alertStatus" style="display:none ;"><%=loginStatus%></div>
+                    <div class="alert alert-danger" role="alert" id="alert" style="display:none ;">
+                        This is a danger alert—check it out!
+                    </div>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <div>信箱</div>
+                            <input id="loginEmail" class="form-control" type="email" name="mail" placeholder="請輸入信箱" required="required" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <div>密碼</div>
+                            <input id="loginPW" class="form-control" type="password" name="password" placeholder="請輸入密碼" required="required" autocomplete="off">
+                        </div>
+                        <p><a href="#">忘記密碼?</a></p>
+                        <div><input type="submit" class="btn btn-lg m-1 p-0" id="loginBtn" value="登入"></div>
+    
+                        <div><a href="/home/signIn" class="btn btn-lg m-1 p-0">註冊</a></div>
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script type="module" src="/js/user.js"></script> -->
+    <script type="module"  src="/js/user.js"></script>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v15.0&appId=5572496966163434&autoLogAppEvents=1" nonce="40S60h4N"></script>
+    <script>
+        //第三方
+        // $(document).ready(function () {
+        //     console.log("載入頁面完成(ejs)")
+        //     checkLoginState();
+        // })
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '{your-app-id}',
+                cookie     : true,  // enable cookies to allow the server to access 
+                                    // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : '{api-version}' // Specify the Graph API version to use
+            });
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        };
+
+        function statusChangeCallback(response) {
+            console.log('statusChangeCallback',response);
+            //console.log(response);
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+            // Logged into your app and Facebook.
+            onLogin(response.authResponse.accessToken);
+            } else {
+            // The person is not logged into your app or we are unable to tell.
+            $('#fblogin').css("display", "block");
+            }
+        }
+        
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+            });
+        }
+        var onLogin=(token)=>{
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', {'fields': 'id,name,email,picture'}, function(response) {
+                console.log('Successful login : ' ,response);
+                //window.location.href='/home/allUsers/'+response.name;
+                $('#alert').css("display", "none");
+                $('#fblogin').css("display", "none");
+                document.cookie = 'token='+token;
+                //res.cookie("token", token, { maxAge: process.env.COOKIE_EXPIRES_IN, httpOnly: true });
+                window.location.href="/home/authority"
+                })
+                   
+                
+                
+        }
+        
+        
+        window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '5572496966163434',//5572496966163434//496729089013488
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v2.7'//1.1
+        });
+            
+        FB.AppEvents.logPageView();   
+            
+        FB.getLoginStatus(function (response) {
+            console.log('This a FB res', response); //這裡待會兒會在控制台上印出你的FB登入訊息
+            statusChangeCallback(response);
+            });
+        };
+
+
+
+        (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    </script>
+   
+    </body>
+<%- include('footer') %>

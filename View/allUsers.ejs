@@ -1,0 +1,35 @@
+
+<%- include('header') %>
+<script src="/js/allUsers.js"></script>
+
+<body>
+    <h2 >test</h2>
+    <div id="test"></div>
+    <%= name %>
+    <ul>
+        <% eachUsers.forEach(function(singleUser) { %>
+            <li><%= singleUser.Name %></li>
+        <% }); %>
+      </ul>
+      <table class="table table-bordered">
+        <tr>
+          <th>name</th>
+          <th>link</th>
+        </tr>
+        <% eachUsers.forEach(function(singleUser) { %>
+            <tr>
+                <td>
+                    <%= singleUser.Name %>
+                </td>
+              <td>
+                  <a href="home/allUsers/<%= singleUser.Name %>">
+                    home/allUsers/:<%= singleUser.Name %>
+                  </a>
+              </td>
+             
+            </tr>
+        <% }); %>
+      </table>
+</body>
+
+<%- include('footer') %>

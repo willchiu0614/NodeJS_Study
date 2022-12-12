@@ -1,0 +1,39 @@
+<%- include('header') %>
+
+    <body >
+        <div class="container">
+            <div class="card-wrap">
+
+                <div class="card border-0 shadow card--register is-show" id="mailPassCheck">
+                    <div class="card-body">
+                        <h2 class="card-title">驗證碼確認</h2>
+                        <div>以寄送驗證碼置信箱:<%=mail%></div>
+                        <div class="alert alert-danger" role="alert" id="alert" style="display:none ;">
+                            This is a danger alert—check it out!
+                        </div>
+                        <form id="mailPassCheckForm" method="POST" action="/api/mailCheck">
+                            <div class="form-group">
+                                <div>驗證碼</div>
+                                <input class="form-control" type='text' name="mailPassNum" placeholder="" required="required">
+                                <input type="hidden" value='<%=mail%>' name="mailAddress" id="mail">
+                                <div  class="d-flex justify-content-end ">
+                                    <div id="time" class="d-inline  p-2  text-red">10</div>
+                                    
+                                    <input type="button" value="重送" id="resendBtn" class="d-inline p-2  btn btn-link  ">
+                                </div>
+                                
+                            </div>
+                            <div><input type="submit" class="btn btn-lg m-1 p-0" id="mailPassCheckBtn" value="確認"></div>
+                            
+                        </form>
+                    </div>
+                    <!-- <button class="btn btn-back js-btn" data-target="welcome"><i class="fas fa-angle-left"></i></button> -->
+                </div>
+            </div>
+        </div>
+        <script src="/js/mailPassCheck.js"></script>
+        <script>
+            
+        </script>
+    </body>
+    <%- include('footer') %>

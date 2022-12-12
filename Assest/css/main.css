@@ -1,0 +1,292 @@
+/*	
+*	############################################################################################
+*	
+*	KLOROFIL - Free Bootstrap Dashboard Template
+*	---------------------------------------------------------------------
+*
+*	Version: 	2.0
+*	Author: 	The Develovers
+*	Website: 	https://www.themeineed.com/
+*	Copyright: 	Copyright 2016 The Develovers
+*	License: 	Creative Common Attribution 4.0 https://creativecommons.org/licenses/by/4.0/
+*	
+*	############################################################################################
+*/
+/********************
+ * GENERAL STYLES
+ ********************/
+/* * {border:solid 1px red} */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #ffffff,
+    #1b65e6,
+    #003869,
+    #00215a,
+    #03112c
+  );
+  /* background-color: #f3f5f8; */
+  /* font-family: "Source Sans Pro", sans-serif; */
+  font-family: "Font Awesome 6";
+  font-size: 15px;
+  color: #676a6d;
+}
+
+a {
+  color: #3287b2;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: #3b98c8;
+  text-decoration: none;
+}
+
+th {
+  font-weight: 900;
+}
+
+.page-title {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-weight: 900;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.copyright {
+  margin-bottom: 0;
+  text-align: right;
+  font-size: 13px;
+}
+
+.smallbtn {
+  width: 25px;
+  height: 25px;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  perspective: 1500px;
+}
+
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100vh;
+  z-index: 999;
+  /* background: #7386D5; */
+  color: #fff;
+  transition: all 0.3s;
+  overflow-y: scroll;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+#sidebar.active {
+  left: 0;
+  height: 100vh;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  /* full screen */
+  width: 100vw;
+  height: 100vh;
+  /* transparent black */
+  background: rgba(0, 0, 0, 0.7);
+  /* middle layer, i.e. appears below the sidebar */
+  z-index: 998;
+  opacity: 0;
+  /* animate the transition */
+  transition: all 0.5s ease-in-out;
+}
+/* display .overlay when it has the .active class */
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+#dismiss {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  /* background: #7386D5; */
+
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+/* login */
+
+.light-text {
+  color: #ffffff;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.card-wrap {
+  width: 100%;
+  /* height:70%; */
+}
+.card {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 769px) {
+  .card-wrap {
+    max-width: 450px;
+  }
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.card-body p {
+  font-size: 1.1rem;
+}
+.card-title {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+.badge-wrap {
+  display: flex;
+  justify-content: center;
+}
+.badge-wrap a.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 0.2rem;
+  padding: 0;
+  opacity: 0.7;
+  border-radius: 50%;
+  transition: opacity 0.3s ease-in;
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.badge-wrap a.badge:hover {
+  opacity: 1;
+  color: #fff;
+}
+.btn {
+  color: #fff !important;
+  width: 5em;
+  transition: all 0.4s;
+  border-radius: 20px;
+  border: 2px solid transparent;
+}
+.btn.btn-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+  border: 0;
+}
+.btn.btn-back:hover {
+  border: 0 !important;
+}
+.form-control {
+  font-family: handle, cursive;
+}
+.form-control::-webkit-input-placeholder {
+  font-family: josefin sans, sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+.form-control:-ms-input-placeholder {
+  font-family: josefin sans, sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+.form-control::-ms-input-placeholder {
+  font-family: josefin sans, sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+.form-control::placeholder {
+  font-family: josefin sans, sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+
+.card-title {
+  color: #a7bfe8;
+}
+.badge {
+  background-color: #a7bfe8;
+}
+.btn {
+  background-color: #a7bfe8;
+  font-family: josefin sans, sans-serif;
+}
+.btn.btn2 {
+  background-color: #e8a7cf;
+  font-family: josefin sans, sans-serif;
+}
+.btn:hover {
+  background-color: #fff;
+  color: #a7bfe8 !important;
+  font-weight: 700;
+  border: 2px solid rgba(167, 191, 232, 0.25);
+}
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(167, 191, 232, 0.25);
+}
+.form-control {
+  color: #a7bfe8;
+  border-color: rgba(167, 191, 232, 0.25);
+}
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(167, 191, 232, 0.25);
+}
+/* body{
+  background:linear-gradient(to right,#ffdde1,#ee9ca7,#a7bfe8,#6190e8);
+  background-size:500% 500%;
+  transition:background 3s ease;
+  background-position:50% 50%}
+body.is-register{background-position:0% 50%}
+body.is-login{background-position:100% 0%} */
+.card {
+  transition: all 0.3s 0.1s ease-out;
+}
+/* .card:not(.is-show){opacity:0;-webkit-transform:translate(-50%,-50%) rotateX(95deg);transform:translate(-50%,-50%) rotateX(95deg)}
+.card.is-show{opacity:1;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);z-index:5} */
