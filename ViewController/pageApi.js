@@ -2,7 +2,7 @@
 // User相關的 api
 const userRequest = axios.create({
   //baseURL: 'http://localhost:8080/home'
-  baseURL: 'https://4213-2001-b400-e350-5116-c8e0-d151-942b-81d2.jp.ngrok.io/'
+  baseURL: 'https://nodejs-study.onrender.com/'
 });
 // 文章相關的 api
 const articleRequest = axios.create({
