@@ -50,13 +50,14 @@ module.exports = async (req, res, next) => {
                 user_mail:data.email,
                 user_sex:"no",
                 user_age:999,
-                user_auth:1
+                user_auth:3
               }
               
             }
             req.payload = fbPayload;
             req.loginStatus = 1
             next();
+            resolve(payload); // 驗證成功回傳 returnData
           }
           else {
             console.log("token error")
@@ -64,7 +65,9 @@ module.exports = async (req, res, next) => {
             next();
           }
           //reject(err); // 驗證失敗回傳錯誤
-        } else {
+        } 
+        else 
+        {
           console.log("token sucess")
           req.payload = payload;
           req.loginStatus = 1

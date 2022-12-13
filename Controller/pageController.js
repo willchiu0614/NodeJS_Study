@@ -88,6 +88,11 @@ var classifyUserFunc= async (req,res,next)=>{// 解析token
                     eachUsers: allUserData
                     })*/
                 break;
+            case 3: 
+                    res.redirect('/home/allUsers/'+req.payload.payload.user_name)
+                    //next();
+
+                break;
         }
     
     next()
