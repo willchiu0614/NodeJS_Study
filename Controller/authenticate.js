@@ -57,7 +57,7 @@ module.exports = async (req, res, next) => {
             req.payload = fbPayload;
             req.loginStatus = 1
             next();
-            resolve(payload); // 驗證成功回傳 returnData
+            resolve(fbPayload); // 驗證成功回傳 returnData
           }
           else {
             console.log("token error")
