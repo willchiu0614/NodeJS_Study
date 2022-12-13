@@ -48,50 +48,38 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v15.0&appId=5572496966163434&autoLogAppEvents=1" nonce="Kzrrl7oO"></script>
     <!-- 按鈕src -->
-    
+
     <script>
         //第三方
         window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '5572496966163434',//5572496966163434//496729089013488
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v2.7'//1.1
-        });
-            
-        FB.AppEvents.logPageView();   
-            
-        FB.getLoginStatus(function (response) {
-            console.log('-This a FB res', response); //這裡待會兒會在控制台上印出你的FB登入訊息
-            statusChangeCallback(response);
+            FB.init({
+                appId      : '5572496966163434',//5572496966163434//496729089013488
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v2.7'//1.1
             });
+                
+            FB.AppEvents.logPageView();   
+                
+            FB.getLoginStatus(function (response) {
+                console.log('-This a FB res', response); //這裡待會兒會在控制台上印出你的FB登入訊息
+                statusChangeCallback(response);
+                });
         };
 
 
 
         (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-      //
-        // window.fbAsyncInit = function() {
-        //     FB.init({
-        //         appId      : '{your-app-id}',
-        //         cookie     : true,  // enable cookies to allow the server to access 
-        //                             // the session
-        //         xfbml      : true,  // parse social plugins on this page
-        //         version    : '{api-version}' // Specify the Graph API version to use
-        //     });
-        //     FB.getLoginStatus(function(response) {
-        //         statusChangeCallback(response);
-        //     });
-        // };
+
 
         function statusChangeCallback(response) {
-            console.log('statusChangeCallback',response);
+            console.warn('statusChangeCallback',response);
             if (response.status === 'connected') {
             onLogin(response.authResponse.accessToken);
             } else {
@@ -100,6 +88,7 @@
         }
         
         function checkLoginState() {
+            console.log("checkLoginState()")
             FB.getLoginStatus(function(response) {
             statusChangeCallback(response);
             });
