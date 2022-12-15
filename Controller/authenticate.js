@@ -1,29 +1,30 @@
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const { check } = require('./nodemailer');
-
+const usersModel = require('../Model/user');
 
 var checkFacebookToken = async (accessToken) => {
- 
+
   var check = await axios.get(
-   `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`
- );
- console.log("checkFacebookToken:", check.data);
- return check.data;
- // if(check!=undefined)
- // {
- //   console.log("checkFacebookToken:", check.data);
- //   var fbPayload={
- //    user_name:check.data.name,
- //    user_mail:check.data.email,
- //    user_sex:"no",
- //    user_age:999,
- //    user_auth:1
- //  }
- //  return fbPayload;
- // }
- // return check;
+    `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`
+  );
+  console.log("checkFacebookToken:", check.data);
+  return check.data;
+  // if(check!=undefined)
+  // {
+  //   console.log("checkFacebookToken:", check.data);
+  //   var fbPayload={
+  //    user_name:check.data.name,
+  //    user_mail:check.data.email,
+  //    user_sex:"no",
+  //    user_age:999,
+  //    user_auth:1
+  //  }
+  //  return fbPayload;
+  // }
+  // return check;
 }
+
 
 module.exports = async (req, res, next) => {
 
@@ -41,18 +42,18 @@ module.exports = async (req, res, next) => {
     return new Promise((resolve, reject) => {
       jwt.verify(token, process.env.SECRET, async (err, payload) => {
         if (err) {
-          data=await checkFacebookToken(token)
-          if (data!=undefined) {
-            console.log("fb token ",data)
-            var fbPayload={
-              payload:{
-                user_name:data.name,
-                user_mail:data.email,
-                user_sex:"no",
-                user_age:999,
-                user_auth:3
+          data = await checkFacebookToken(token)
+          if (data != undefined) {
+            console.log("fb token ", data)
+            var fbPayload = {
+              payload: {
+                user_name: data.name,
+                user_mail: data.email,
+                user_sex: "no",
+                user_age: 999,
+                user_auth: 3
               }
-              
+
             }
             req.payload = fbPayload;
             req.loginStatus = 1
@@ -65,9 +66,8 @@ module.exports = async (req, res, next) => {
             next();
           }
           //reject(err); // 驗證失敗回傳錯誤
-        } 
-        else 
-        {
+        }
+        else {
           console.log("token sucess")
           req.payload = payload;
           req.loginStatus = 1
