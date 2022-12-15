@@ -93,9 +93,9 @@ var classifyUserFunc = async (req, res, next) => {// 解析token
 
             } else {
                 //資料庫創建資料
-                user=req.payload.payload
-                await user.createThirdRegisterData(user);
-                res.redirect('/home/allUsers/' + user.user_name+"(fb)")
+                userData=req.payload.payload
+                await user.createThirdRegisterData(userData);
+                res.redirect('/home/allUsers/' + userData.user_name+"(fb)")
             }
 
             //next();
