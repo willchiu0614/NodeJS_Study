@@ -16,11 +16,7 @@ app.use(cookieParser())
 
 
 module.exports.createThirdRegisterData = async function (data) {
-  returnData.body.username=user.user_name
-  returnData.body.age=user.user_age
-  returnData.body.sexual=user.user_sex
-  returnData.body.mail=user.user_mail
-  returnData.body.authority=3
+
   if(data.user_auth!=3)return
   usersModel.create({
     Name:data.user_name,
@@ -31,7 +27,10 @@ module.exports.createThirdRegisterData = async function (data) {
     Authority:data.user_auth,
     MailCheckVal:'noCode',
     
+  }).then(() => {
+    console.log(colors('cyan',"[user]註冊成功"))
   })
+  .catch(err => console.log(err))
 }
 
 module.exports.postRegisterData = async function (data) {
