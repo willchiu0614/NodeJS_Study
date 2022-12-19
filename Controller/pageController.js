@@ -89,9 +89,9 @@ var classifyUserFunc = async (req, res, next) => {// 解析token
             console.log("資料庫搜尋:"+req.payload.payload.user_mail+","+type.AuthorityEnum.fbUser)
             allUsers = await usersModel.find();
             console.log("allUsers:",allUsers)
-            
+
             singleUser = await usersModel.findOne()
-            .where('Name').equals(req.payload.payload.user_mail)
+            .where('Mail').equals(req.payload.payload.user_mail)
             .where('Authority').equals(type.AuthorityEnum.fbUser)
             console.log("singleUser:",singleUser)
             if (singleUser) {
