@@ -2,7 +2,7 @@ const colors = require('colors-console')
 var express = require('express');
 const app = express();
 var router = express.Router();
-
+const type = require('./type');
 var user = require('./user');
 const usersModel = require('../Model/user');
 var authenticate = require('./authenticate');
@@ -59,9 +59,9 @@ var tokenFunc = async (req, res, next) => {// 解析token
 }
 var classifyUserFunc = async (req, res, next) => {// 解析token
     switch (req.payload.payload.user_auth) {
-        case 0:
+        case type.AuthorityEnum.visiter:
             break;
-        case 1:
+        case type.AuthorityEnum.user:
             singleUser = await usersModel.findOne({ Name: req.payload.payload.user_name });
             if (singleUser) {
                 req.user = singleUser;
@@ -77,7 +77,7 @@ var classifyUserFunc = async (req, res, next) => {// 解析token
                 name:singleUser.Name,
               })*/
             break;
-        case 2:
+        case type.AuthorityEnum.admin:
             allUserData = await user.getAll()
             res.redirect('/home/allUsers/');
             /*res.render('allUsers', {
@@ -85,15 +85,18 @@ var classifyUserFunc = async (req, res, next) => {// 解析token
                 eachUsers: allUserData
                 })*/
             break;
-        case 3:
-            singleUser = await usersModel.findOne({ Name: req.payload.payload.user_mail,Authority:3 });
+        case type.AuthorityEnum.fbUser:
+            console.log("資料庫搜尋:"+req.payload.payload.user_mail+","+type.AuthorityEnum.fbUser)
+            singleUser = await usersModel.findOne({ Name: req.payload.payload.user_mail,Authority:type.AuthorityEnum.fbUser});
             if (singleUser) {
                 //確認身分跳轉網頁
+                console.log("確認第三方身分跳轉網頁")
                 req.user = singleUser;
                 res.redirect('/home/allUsers/' + singleUser.Name)
 
             } else {
                 //資料庫創建資料
+                console.log("初次第三方身分登入，後端創建資料")
                 userData=req.payload.payload
                 /*await user.createThirdRegisterData(userData);
                 res.redirect('/home/allUsers/' + userData.user_name+"(fb)")*/

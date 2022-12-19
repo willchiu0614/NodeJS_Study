@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const { check } = require('./nodemailer');
 const usersModel = require('../Model/user');
-
+const type = require('./type');
 var checkFacebookToken = async (accessToken) => {
 
   var check = await axios.get(
@@ -51,7 +51,7 @@ module.exports = async (req, res, next) => {
                 user_mail: data.email,
                 user_sex: "no",
                 user_age: 999,
-                user_auth: 3
+                user_auth: type.AuthorityEnum.fbUser
               }
 
             }
