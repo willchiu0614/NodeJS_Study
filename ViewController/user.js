@@ -45,7 +45,7 @@ $(function () {
         }
         else
         {
-          res.redirect('/home/allUsers/' + returnData.username+"(fb)")
+          window.location.href=('/home/allUsers/' + returnData.username+"(fb)")
         }
           /*switch (returnData.status) {
             case 0:
