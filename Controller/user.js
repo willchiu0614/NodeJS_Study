@@ -46,7 +46,7 @@ module.exports.postRegisterData = async function (data) {
 
     // 檢查該信箱是否已經註冊
     var status
-    var returnData={status,username,email}
+    var returnData={status,username,email,authority}
     await usersModel.findOne({ Mail:email,Authority:authority }).then(user => {
       // 如果已經註冊：退回原本畫面
       if (user) {
@@ -78,7 +78,9 @@ module.exports.postRegisterData = async function (data) {
               console.log(colors('cyan',"[user]註冊成功"))
              
               status = type.UserEnum.registerSucess;
-              mail(email);
+              if(authority!=type.AuthorityEnum.fbUser)
+              {mail(email);}
+              
              
               //return 回到pageController.js
             })
@@ -89,7 +91,7 @@ module.exports.postRegisterData = async function (data) {
     returnData.status=status
     returnData.username=username
     returnData.email.email
-
+    returnData.email.authority
     return returnData
     //return status
 }

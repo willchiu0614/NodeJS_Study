@@ -1,1 +1,2 @@
 module.exports.UserEnum= Object.freeze({"faild":0,"registerSucess":1,"mailRepeat":2, "passwordNotEqual":3,"loginSucess":4,"mailError":5, "passwordError":6})
+module.exports.AuthorityEnum= Object.freeze({"visiter":0,"user":1,"admin":2, "fbUser":3})

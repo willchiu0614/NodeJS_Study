@@ -1,4 +1,5 @@
 import { userSignUp,userLogIn } from "/js/pageApi.js"; 
+import { authorityEnum} from "/js/type.js"; 
 $(document).ready(function () {
   console.log("載入頁面完成")
   console.log("loginStatus:",$('#loginStatus').text())
@@ -38,7 +39,14 @@ $(function () {
       userSignUp(data)
       .then((res)=>{
         var returnData=res.data.returnData
-        setAlert(returnData.status,"/home/mailPassCheck/"+returnData.email)
+        if(returnData.authority!=authorityEnum.fbUser)
+        {
+          setAlert(returnData.status,"/home/mailPassCheck/"+returnData.email)
+        }
+        else
+        {
+          res.redirect('/home/allUsers/' + returnData.username+"(fb)")
+        }
           /*switch (returnData.status) {
             case 0:
               $('#alert').css("display", "none");
