@@ -32,6 +32,7 @@ $(function () {
     $('#registerForm').submit(function (event) {
       event.preventDefault(); // Prevent the form from submitting via the browser
       var form = $(this);
+      authority=$('#AuthoritySelect').val();
       var data=form.serialize()+'&authority='+authority
       console.log("register data:",data)
       userSignUp(data)
