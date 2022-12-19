@@ -34,7 +34,7 @@ app.use(cookieParser())
 }*/
 
 module.exports.postRegisterData = async function (data) {
-  
+    console.log("postRegisterData:",data)
     // 取得使用者註冊資料
     username = data.body.username
     userage=data.body.age
