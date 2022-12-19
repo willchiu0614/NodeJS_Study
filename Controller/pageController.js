@@ -87,7 +87,9 @@ var classifyUserFunc = async (req, res, next) => {// 解析token
             break;
         case type.AuthorityEnum.fbUser:
             console.log("資料庫搜尋:"+req.payload.payload.user_mail+","+type.AuthorityEnum.fbUser)
-            singleUser = await usersModel.findOne({ Name: req.payload.payload.user_mail,Authority:type.AuthorityEnum.fbUser});
+            allUsers = await usersModel.find();
+            console.log("allUsers:",allUsers)
+            singleUser = await usersModel.findOne({ Name: req.payload.payload.user_mail,Authority:type.AuthorityEnum.fbUser})
             if (singleUser) {
                 //確認身分跳轉網頁
                 console.log("確認第三方身分跳轉網頁")
