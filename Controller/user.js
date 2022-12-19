@@ -34,12 +34,12 @@ app.use(cookieParser())
 }*/
 
 module.exports.postRegisterData = async function (data) {
-    console.log("postRegisterData:",data)
+    console.log("postRegisterData:",data.body)
     // 取得使用者註冊資料
     username = data.body.username
     userage=data.body.age
     usersexual=data.body.sexual
-    email = data.body.mail
+    email = data.body.email
     password = data.body.password
     confirmPassword = data.body.password2
     authority = data.body.authority
