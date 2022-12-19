@@ -86,8 +86,9 @@ var classifyUserFunc = async (req, res, next) => {// 解析token
                 })*/
             break;
         case 3:
-            singleUser = await usersModel.findOne({ Name: req.payload.payload.user_name });
+            singleUser = await usersModel.findOne({ Name: req.payload.payload.user_mail,Authority:3 });
             if (singleUser) {
+                //確認身分跳轉網頁
                 req.user = singleUser;
                 res.redirect('/home/allUsers/' + singleUser.Name)
 
@@ -96,6 +97,7 @@ var classifyUserFunc = async (req, res, next) => {// 解析token
                 userData=req.payload.payload
                 await user.createThirdRegisterData(userData);
                 res.redirect('/home/allUsers/' + userData.user_name+"(fb)")
+               // res.redirect('/home/signIn/?userName='+userData.user_name+'&userMail='+userData.user_mail)
             }
 
             //next();
@@ -149,7 +151,16 @@ router.get('/logIn', function (req, res, next) {
 
 router.get('/signIn', async function (req, res, next) {
     console.log("signin")
-    res.render('register');
+    console.warn("req.query.userName:"+req.query.userName+",req.query.userMail:"+req.query.userMail)
+    if(req.query.userName&&req.query.userMail)
+    {
+        res.render('register',{nameVal:req.query.userName,mailVal:req.query.userMail,show:true});
+    }
+    else
+    {
+        res.render('register',{nameVal:null,mailVal:null,show:false});
+    }
+    
 });
 
 router.get('/mailPassCheck/:mail', async function (req, res, next) {
